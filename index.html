@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff6b35">
+  <title>Florida Man Adventures - Official Merch</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      border-radius: 20px;
+      margin-bottom: 40px;
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .tagline {
+      font-size: 1.2em;
+      opacity: 0.9;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .product-card {
+      background: #2d2d2d;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image::before {
+      content: '👕';
+      position: absolute;
+      font-size: 150px;
+      opacity: 0.3;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .product-info {
+      padding: 25px;
+    }
+
+    .product-name {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #ff6b35;
+    }
+
+    .product-description {
+      color: #ccc;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .product-features {
+      background: #1a1a1a;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .product-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .product-features li {
+      padding: 8px 0;
+      color: #aaa;
+      border-bottom: 1px solid #333;
+    }
+
+    .product-features li:last-child {
+      border-bottom: none;
+    }
+
+    .product-features li:before {
+      content: "✓ ";
+      color: #ff6b35;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+
+    .product-price {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .size-selector {
+      margin-bottom: 20px;
+    }
+
+    .size-selector label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ff6b35;
+      font-weight: bold;
+    }
+
+    .size-selector select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid #ff6b35;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .size-selector select:focus {
+      outline: none;
+      border-color: #f7931e;
+    }
+
+    .buy-button {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .buy-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(255, 107, 53, 0.5);
+    }
+
+    .buy-button:active {
+      transform: scale(0.98);
+    }
+
+    .success-message {
+      background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
+    }
+
+    .success-message h2 {
+      margin-bottom: 10px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      color: #888;
+      border-top: 1px solid #3d3d3d;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em;
+      }
+      
+      .products {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🐊 Florida Man Adventures 🌴</h1>
+      <p class="tagline">Urgency-Aware Gear for Hurricane Prep & Beyond</p>
+    </header>
+
+    <div id="success-container"></div>
+
+    <div class="products">
+      <!-- Product 1: Classic Tee -->
+      <div class="product-card">
+        <div class="product-image">
+          👕
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">Classic Florida Man Tee</h2>
+          <p class="product-description">
+            Our signature cotton tee built for Florida's unpredictable lifestyle. Whether you're preparing for hurricane season, 
+            camping in the Everglades, or just representing the Sunshine State spirit, this shirt delivers comfort and durability.
+          </p>
+          <div class="product-features">
+            <ul>
+              <li>100% premium ring-spun cotton</li>
+              <li>Pre-shrunk fabric for perfect fit</li>
+              <li>Reinforced shoulder seams</li>
+              <li>Breathable for Florida heat</li>
+              <li>Machine washable</li>
+              <li>Screen-printed Florida Man logo</li>
+            </ul>
+          </div>
+          <div class="product-price">$29.99</div>
+          <div class="size-selector">
+            <label for="size-classic">Select Size:</label>
+            <select id="size-classic">
+              <option value="S">Small</option>
+              <option value="M" selected>Medium</option>
+              <option value="L">Large</option>
+              <option value="XL">X-Large</option>
+              <option value="XXL">XX-Large</option>
+            </select>
+          </div>
+          <button class="buy-button" onclick="buyProduct('price_1QMgzwBqQ7s3j2bGzV3efxkK', 'size-classic')">
+            Buy Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Product 2: Premium Tee -->
+      <div class="product-card">
+        <div class="product-image">
+          ⭐
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">Premium Hurricane Edition</h2>
+          <p class="product-description">
+            Engineered for extreme conditions. This premium tri-blend shirt combines the softness of cotton, 
+            durability of polyester, and stretch of rayon. Perfect for those who demand the best gear when 
+            nature throws its worst at you.
+          </p>
+          <div class="product-features">
+            <ul>
+              <li>Tri-blend fabric (50% poly, 25% cotton, 25% rayon)</li>
+              <li>Moisture-wicking technology</li>
+              <li>Ultra-soft vintage feel</li>
+              <li>Quick-dry material</li>
+              <li>Odor-resistant treatment</li>
+              <li>Enhanced Florida Man emblem</li>
+              <li>Tagless for maximum comfort</li>
+            </ul>
+          </div>
+          <div class="product-price">$39.99</div>
+          <div class="size-selector">
+            <label for="size-premium">Select Size:</label>
+            <select id="size-premium">
+              <option value="S">Small</option>
+              <option value="M" selected>Medium</option>
+              <option value="L">Large</option>
+              <option value="XL">X-Large</option>
+              <option value="XXL">XX-Large</option>
+            </select>
+          </div>
+          <button class="buy-button" onclick="buyProduct('price_1QMh09BqQ7s3j2bGsGo7wC7W', 'size-premium')">
+            Buy Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Product 3: Survival Bundle -->
+      <div class="product-card">
+        <div class="product-image">
+          🎁
+        </div>
+        <div class="product-info">
+          <h2 class="product-name">Survival Bundle</h2>
+          <p class="product-description">
+            The ultimate Florida Man gear package. Get both the Classic and Premium tees plus our exclusive 
+            waterproof sticker pack. Save $10 compared to buying separately while maxing out your preparedness 
+            and style quotient.
+          </p>
+          <div class="product-features">
+            <ul>
+              <li>1x Classic Florida Man Tee</li>
+              <li>1x Premium Hurricane Edition Tee</li>
+              <li>Exclusive 5-pack waterproof stickers</li>
+              <li>Limited edition welcome card</li>
+              <li>Save $10 off individual prices</li>
+              <li>Free priority shipping</li>
+              <li>Both shirts in your selected size</li>
+            </ul>
+          </div>
+          <div class="product-price">$59.99 <span style="font-size: 0.5em; color: #888; text-decoration: line-through;">$69.98</span></div>
+          <div class="size-selector">
+            <label for="size-bundle">Select Size:</label>
+            <select id="size-bundle">
+              <option value="S">Small</option>
+              <option value="M" selected>Medium</option>
+              <option value="L">Large</option>
+              <option value="XL">X-Large</option>
+              <option value="XXL">XX-Large</option>
+            </select>
+          </div>
+          <button class="buy-button" onclick="buyProduct('price_1QMh0kBqQ7s3j2bGPj2vKdQV', 'size-bundle')">
+            Buy Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Florida Man Adventures. Operated by a caregiver and survivor-architect.</p>
+      <p>Deep roots in Charlotte County. Mission: Restore integrity to civic tech and disaster recovery commerce.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Initialize Stripe
+    const stripe = Stripe('pk_test_51QMgx5BqQ7s3j2bGxHJuOy0vhKfJFxRzHvKmzaDMtT6iJ6t2kLYFKHO0GfFXRjVfFJXwQBTe84zZMZz6pAO7fWjE00tgKcxMlm');
+
+    // Check for success parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+      document.getElementById('success-container').innerHTML = `
+        <div class="success-message">
+          <h2>🎉 Order Successful!</h2>
+          <p>Thank you for your purchase! Check your email for order confirmation.</p>
+        </div>
+      `;
+    }
+
+    async function buyProduct(priceId, sizeSelectId) {
+      const size = document.getElementById(sizeSelectId).value;
+      
+      try {
+        // Create Checkout Session
+        const response = await fetch('https://mahi-stripe-backend.replit.app/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            priceId: priceId,
+            size: size
+          }),
+        });
+
+        const session = await response.json();
+
+        // Redirect to Checkout
+        const result = await stripe.redirectToCheckout({
+          sessionId: session.id,
+        });
+
+        if (result.error) {
+          alert(result.error.message);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Something went wrong. Please try again.');
+      }
+    }
+  </script>
+</body>
+                                          </html>
