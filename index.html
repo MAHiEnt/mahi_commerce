@@ -22,7 +22,7 @@
       padding: 0 6vw;
       max-width: 1350px;
     }
-    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 32px; }
+<div id="product-grid" class="products"></div>    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 32px; }
     .product-card {
       position: relative;
       background: linear-gradient(115deg, #fff, #eef3fa 55%);
@@ -217,6 +217,27 @@
         });
     }
     document.addEventListener('DOMContentLoaded', fetchAndRenderProducts);
-  </script>
+  </script><script>
+  fetch('variants/floridamanproducts.json')
+    .then(response => response.json())
+    .then(products => {
+      const container = document.getElementById('product-grid');
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product';
+        card.innerHTML = `
+          <img src="${product.mockup_url}" alt="${product.title}">
+          <h3>${product.title}</h3>
+          <p>${product.description}</p>
+          <strong>$${product.price}</strong>
+          <button>Buy Now</button>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error('Failed to load products:', error);
+    });
+</script>
 </body>
 </html>
