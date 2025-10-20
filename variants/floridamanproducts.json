@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "product_id": "gator-rider",
+    "title": "Florida Man: Gator Rider",
+    "description": "Ride or die. Swamp edition.",
+    "price": "29.99",
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/assets/mockups/gator-rider.png",
+    "badge": "HOT"
+  },
+  {
+    "product_id": "nano-gator",
+    "title": "Florida Man: Nanotech Gator",
+    "description": "Microscopic chaos. Maximum weirdness.",
+    "price": "29.99",
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/assets/mockups/nano-gator.png",
+    "badge": "NEW"
+  }
+][]
