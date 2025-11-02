@@ -2,42 +2,42 @@
   {
     "product_id": "gator-rider",
     "title": "Florida Man: Gator Rider",
-    "description": "Witness the legend...",
+    "description": "Witness the legend. This design captures the untamed spirit of a man who fears nothing, not even a 12-foot gator.",
     "price": 29.99,
     "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/gator-rider.png"
   },
   {
     "product_id": "test-florida-man",
     "title": "Florida Man: Classic Chaos",
-    "description": "The original, the icon...",
+    "description": "The original, the icon. This is the design that started it all. Pure, unpredictable Florida Man energy.",
     "price": 29.99,
     "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/test-florida-man.png"
   },
   {
     "product_id": "gator-surf",
     "title": "Surf's Up Gator",
-    "description": "Only in Florida...",
+    "description": "Only in Florida. This man didn't just surf the wave, he surfed the gator surfing the wave. Legendary.",
     "price": 29.99,
     "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/gator-surf.jpg"
   },
   {
     "product_id": "flamingo-heist",
     "title": "Flamingo Heist",
-    "description": "He said he was 'just borrowing them.'",
+    "description": "He said he was 'just borrowing them.' This design pays homage to the great Flamingo Heist of '03. A true masterpiece.",
     "price": 29.99,
     "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/flamingo-heist.jpg"
   },
   {
     "product_id": "iguana-chip-wars",
     "title": "Iguana Chip Wars",
-    "description": "He fought an iguana for the last chip...",
+    "description": "He fought an iguana for the last chip. And won. Wear the victory of a man who respects no part of the food chain.",
     "price": 29.99,
     "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/iguana-chip-wars.jpg"
   },
   {
     "product_id": "vending-machine",
     "title": "Vending Machine Victory",
-    "description": "The machine stole his dollar...",
+    "description": "The machine stole his dollar. He stole the machine. This design is for anyone who refuses to accept defeat.",
     "price": 29.99,
     "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/vending-machine.jpg"
   }

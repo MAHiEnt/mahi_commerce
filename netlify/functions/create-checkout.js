@@ -1,5 +1,3 @@
-// This file handles the "BUY NOW" button.
-// It now reads from the new database file name.
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const products = require('../../product-database.json');
 
@@ -12,7 +10,6 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: JSON.stringify({ error: "Bad request" }) };
   }
 
-  // Find the product in our "database"
   const product = products.find(p => p.product_id === productId);
   if (!product) {
     return { statusCode: 404, body: JSON.stringify({ error: "Product not found" }) };
@@ -31,7 +28,7 @@ exports.handler = async (event) => {
               name: product.title,
               images: [product.mockup_url]
             },
-            unit_amount: Math.round(product.price * 100), // Stripe needs cents
+            unit_amount: Math.round(product.price * 100),
           },
           quantity: 1,
         },

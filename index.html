@@ -144,19 +144,19 @@
         products.forEach(product => {
             const card = document.createElement('div');
             card.className = 'product-card';
-            card.innerHTML = `
-                <img src="${product.mockup_url}" alt="${product.title}" class="product-image" loading="lazy"
+            card.innerHTML = \`
+                <img src="\${product.mockup_url}" alt="\${product.title}" class="product-image" loading="lazy"
                      onerror="this.onerror=null;this.src='https://placehold.co/400x400/333/888?text=Image+Not+Found';">
                 
                 <div class="product-info">
-                    <h2 class="product-title">${product.title}</h2>
-                    <p style="color: #999;">${product.description}</p>
-                    <div class="product-price">$${product.price.toFixed(2)}</div>
-                    <button class="buy-button" data-product-id="${product.product_id}">
+                    <h2 class="product-title">\${product.title}</h2>
+                    <p style="color: #999;">\${product.description}</p>
+                    <div class="product-price">$ \${product.price.toFixed(2)}</div>
+                    <button class="buy-button" data-product-id="\${product.product_id}">
                         BUY NOW
                     </button>
                 </div>
-            `;
+            \`;
             grid.appendChild(card);
         });
         attachBuyButtonListeners();
@@ -193,10 +193,8 @@
     }
     
     // --- MAIN ---
-    // This is the new, dynamic product loader from your vision.
     document.addEventListener('DOMContentLoaded', async () => {
       try {
-        // This is a relative path to our own backend function.
         const response = await fetch('/.netlify/functions/products');
         if (!response.ok) throw new Error('Failed to fetch product list.');
         
@@ -210,5 +208,3 @@
   </script>
 </body>
 </html>
-
-
