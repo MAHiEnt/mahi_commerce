@@ -1,0 +1,44 @@
+[
+  {
+    "product_id": "gator-rider",
+    "title": "Florida Man: Gator Rider",
+    "description": "Witness the legend...",
+    "price": 29.99,
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/gator-rider.png"
+  },
+  {
+    "product_id": "test-florida-man",
+    "title": "Florida Man: Classic Chaos",
+    "description": "The original, the icon...",
+    "price": 29.99,
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/test-florida-man.png"
+  },
+  {
+    "product_id": "gator-surf",
+    "title": "Surf's Up Gator",
+    "description": "Only in Florida...",
+    "price": 29.99,
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/gator-surf.jpg"
+  },
+  {
+    "product_id": "flamingo-heist",
+    "title": "Flamingo Heist",
+    "description": "He said he was 'just borrowing them.'",
+    "price": 29.99,
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/flamingo-heist.jpg"
+  },
+  {
+    "product_id": "iguana-chip-wars",
+    "title": "Iguana Chip Wars",
+    "description": "He fought an iguana for the last chip...",
+    "price": 29.99,
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/iguana-chip-wars.jpg"
+  },
+  {
+    "product_id": "vending-machine",
+    "title": "Vending Machine Victory",
+    "description": "The machine stole his dollar...",
+    "price": 29.99,
+    "mockup_url": "https://raw.githubusercontent.com/MAHiEnt/mahi_commerce/main/images/vending-machine.jpg"
+  }
+]
